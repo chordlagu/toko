@@ -47,7 +47,7 @@
 
     /* grid */
     .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gap);margin-top:8px}
-    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 4px 14px rgba(2,6,23,0.04);display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.2s;border: solid 1px #e6e9ef;}
+    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 4px 14px rgba(2,6,23,0.04);display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.2s;border: solid 1px #e6e9ef;justify-content: space-between;}
     .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.08)}
     .thumb{width:100%;aspect-ratio:4/3;border-radius:10px;object-fit:cover;background:#f3f4f6}
     .title{font-weight:600;font-size:15px;line-height:1.2}
@@ -378,7 +378,7 @@ function renderGrid(){
     const c = document.createElement('article'); c.className='card'; c.tabIndex=0;
     c.innerHTML = `
       <img loading="lazy" class="thumb" src="${p.media[0]}" alt="${escapeHtml(p.title)}" />
-      <div class="title">${escapeHtml(p.title)}</div>
+      <div class="title">${escapeHtml(p.title.length > 120 ? p.title.slice(0,120) + '…' : p.title)}</div>
       <div class="meta"><div class="muted">${escapeHtml(p.brand)}</div><div class="price">${p.price}</div></div>
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div class="rating"><div class="stars">${starHTML(p.rating)}</div><div class="muted" style="margin-left:0px">${p.rating}</div></div>
