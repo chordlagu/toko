@@ -378,7 +378,7 @@ function renderGrid(){
     const c = document.createElement('article'); c.className='card'; c.tabIndex=0;
     c.innerHTML = `
       <img loading="lazy" class="thumb" src="${p.media[0]}" alt="${escapeHtml(p.title)}" />
-      <div class="title">${escapeHtml(p.title.length > 80 ? p.title.slice(0,120) + '…' : p.title)}</div>
+      <div class="title">${escapeHtml(p.title.length > 80 ? p.title.slice(0,80) + '…' : p.title)}</div>
       <div class="meta"><div class="muted">${escapeHtml(p.brand)}</div><div class="price">${p.price}</div></div>
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div class="rating"><div class="stars">${starHTML(p.rating)}</div><div class="muted" style="margin-left:0px">${p.rating}</div></div>
