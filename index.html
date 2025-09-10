@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Toko Online - Chordlagu.id</title>
+  <meta name="description" content="Toko affiliate Shopee — produk relevan gitar. Cepat, ringan, responsive." />
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-57x57.png' rel='apple-touch-icon' sizes='57x57'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-60x60.png' rel='apple-touch-icon' sizes='60x60'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-72x72.png' rel='apple-touch-icon' sizes='72x72'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-76x76.png' rel='apple-touch-icon' sizes='76x76'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-114x114.png' rel='apple-touch-icon' sizes='114x114'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-120x120.png' rel='apple-touch-icon' sizes='120x120'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-144x144.png' rel='apple-touch-icon' sizes='144x144'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-152x152.png' rel='apple-touch-icon' sizes='152x152'/>
+  <link href='https://cdn.chordlagu.id/favicon/apple-icon-180x180.png' rel='apple-touch-icon' sizes='180x180'/>
+  <link href='https://cdn.chordlagu.id/favicon/android-icon-192x192.png' rel='icon' sizes='192x192' type='image/png'/>
+  <link href='https://cdn.chordlagu.id/favicon/favicon-32x32.png' rel='icon' sizes='32x32' type='image/png'/>
+  <link href='https://cdn.chordlagu.id/favicon/favicon-96x96.png' rel='icon' sizes='96x96' type='image/png'/>
+  <link href='https://cdn.chordlagu.id/favicon/favicon-16x16.png' rel='icon' sizes='16x16' type='image/png'/>
+  <meta content='https://cdn.chordlagu.id/favicon/ms-icon-144x144.png' name='msapplication-TileImage'/>
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
+  <style>
+    :root{
+      --bg:#fdfdfd; --card:#ffffff; --muted:#6b7280; --accent:#0f172a; --primary:#ee4d2d; --glass: rgba(15,23,42,0.04);
+      --radius:14px; --gap:16px; --maxw:1200px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--accent);-webkit-font-smoothing:antialiased}
+    .container{max-width:var(--maxw);margin:0px auto;padding:10px 10px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#000,#000);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    .brand h1{font-size:18px;margin:0}
+    nav{display:flex;gap:8px;align-items:center}
+    .search{flex:1;max-width:420px}
+    .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6e9ef;background:#fff;}
+
+    /* categories */
+    .cats{display:flex;gap:8px;overflow:auto;padding:10px 0;margin-bottom:8px;padding-left:2px;}
+    .cat{white-space:nowrap;padding:5px 8px;border-radius:999px;background:var(--card);box-shadow:0 1px 3px var(--glass);cursor:pointer;font-size:13px;border: solid 1px #f1f1f1;}
+    .cat.active{outline:2px solid var(--primary);}
+
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gap);margin-top:8px}
+    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 4px 14px rgba(2,6,23,0.04);display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.2s;border: solid 1px #e6e9ef;}
+    .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.08)}
+    .thumb{width:100%;aspect-ratio:4/3;border-radius:10px;object-fit:cover;background:#f3f4f6}
+    .title{font-weight:600;font-size:15px;line-height:1.2}
+    .meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
+    .price{font-weight:700;color:var(--primary)}
+
+    /* rating */
+    .rating{display:inline-flex;align-items:center;gap:6px}
+    .stars{display:inline-flex;gap:2px}
+    .star{font-size:10px;color:#f59e0b}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+    .modal{width:100%;max-width:620px;background:var(--card);border-radius:14px;padding:16px;box-shadow:0 20px 50px rgba(2,6,23,0.4);display:grid;grid-template-columns:1fr 360px;gap:16px}
+    .close-btn{position:absolute;right:18px;top:18px;background:transparent;border:0;color:var(--card);font-size:20px}
+
+    /* slider */
+    .slider{position:relative;border-radius:10px;overflow:hidden;background:#000}
+    .slides{display:flex;transition:transform 300ms ease}
+    .slide{min-width:100%;display:flex;align-items:center;justify-content:center}
+    .slide img, .slide video{max-width:100%;height:auto;display:block}
+    .slider-controls{position:absolute;left:8px;right:8px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between}
+    .btn-s{background:rgba(255,255,255,0.82);border-radius:999px;padding:5px 8px;border:0}
+
+    /* details */
+    .detail{padding:6px 4px;display:flex;flex-direction:column;gap:12px}
+    .buy{display:flex;gap:8px;align-items:center}
+    .btn-primary{flex:1;padding:10px;border-radius:10px;border:0;background:linear-gradient(90deg,#ee4d2d,#ff7043);color:white;font-weight:700;text-decoration:none;text-align:center}
+    .btn-secondary{padding:10px;border-radius:10px;border:1px solid #e6e9ef;background:transparent;color:var(--accent);text-align:center;cursor:pointer;}
+
+    footer{margin:28px 0 80px;padding:16px 0;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+
+    /* responsive */
+    @media (max-width:1024px){.grid{grid-template-columns:repeat(5,1fr)}.modal{grid-template-columns:1fr 320px;}}
+    @media (max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}header{flex-direction:row;align-items:center}nav{width:45%;display:block;}.modal{grid-template-columns:1fr;max-width:720px}}
+    @media (max-width:430px){.grid{grid-template-columns:repeat(2,1fr)}.brand h1{font-size:16px}}
+    @media (min-width:1024px){.modal{align-items: center;}}
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:11px}
+    .pill{background:#f8fafc;padding:6px 8px;border-radius:999px;font-size:10px;width: 160px;
+    text-align: center;}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo"><img src="https://cdn.chordlagu.id/favicon/android-icon-192x192.png" width="44" height="44"></div>
+        <div>
+          <h1>Chordlagu.id <small style="color:var(--muted);font-weight:600;display:block;font-size:12px">Toko Gitar & Aksesoris</small></h1>
+        </div>
+      </div>
+      <nav>
+        <div class="search">
+          <input id="q" placeholder="Cari produk gitar, senar, pick, tuner..." />
+        </div>
+        <div style="width:12px"></div>
+      </nav>
+    </header>
+
+    <div class="cats" id="categories"></div>
+
+    <main>
+      <section id="grid" class="grid" aria-live="polite"></section>
+    </main>
+
+    <footer>
+      <div class="muted">© 2025 - Chordlagu.id</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a class="muted" href="#">Tentang</a>
+        <a class="muted" href="#">Kontak</a>
+        <a class="muted" href="#">Kategori</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- modal -->
+  <div id="backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <div style="position:relative">
+        <div class="slider" id="slider">
+          <div class="slides" id="slides"></div>
+          <div class="slider-controls">
+            <button id="prev" class="btn-s" aria-label="Sebelumnya"><i class="fa-solid fa-angle-left"></i></button>
+            <button id="next" class="btn-s" aria-label="Berikutnya"><i class="fa-solid fa-angle-right"></i></button>
+          </div>
+        </div>
+      </div>
+      <aside class="detail">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div id="p-title" class="title"></div>
+              <div class="muted" id="p-brand" style="margin-top:4px"></div>
+            </div>
+            <div class="pill" id="p-sold">0 terjual</div>
+          </div>
+
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+            <div class="rating"><div id="p-stars" class="stars"></div><div id="p-rating" class="muted">4.9</div> <img width="15" src="data:image/png;base64,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"></div>
+            <div class="price" id="p-price">Rp0</div>
+          </div>
+        </div>
+
+        <div id="p-desc" class="muted"></div>
+
+        <div class="buy">
+          <a id="shopee-btn" class="btn-primary" target="_blank" rel="noopener noreferrer">Lihat di Shopee</a>
+          <button id="close" class="btn-secondary" style="display:none;">Tutup</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+<script data-cfasync="false">
+const PRODUCTS = [
+  {
+    id:1,
+    title:'Gitar akustik elektrik CORT ORIGINAL AD810 OP',
+    brand:'Cort',
+    price:'Rp2.560.500',
+    sold:1000,
+    rating:4.8,
+    category:'Gitar',
+    desc:'',
+    media:[
+      'https://down-id.img.susercontent.com/file/id-11134207-7rasd-m2x4it1if4i978.webp',
+      'https://down-id.img.susercontent.com/file/id-11134207-7r98v-lsicftwogn7df9.webp'
+    ],
+    affiliate:'https://s.shopee.co.id/4VTHOjAAVR'
+  },
+  {
+    id:2,
+    title:'Benston Music- Gitar Elektrik , Gitar Elektrik Anak Dan Dewasa..',
+    brand:'benston',
+    price:'Rp745.000',
+    sold:3000,
+    rating:4.8,
+    category:'Gitar',
+    desc:'',
+    media:[
+      'https://down-id.img.susercontent.com/file/id-11134207-81ztp-mefkz66jxvd2a7.webp',
+      'https://down-id.img.susercontent.com/file/sg-11134201-23020-miyaqhu0u9mv01.webp'
+    ],
+    affiliate:'https://s.shopee.co.id/5VLob8xf9d'
+  },
+  {
+    id:3,
+    title:'Senar Gitar Akustik String Import EZ890 EZ900 EZ910 EZ920 EZ930',
+    brand:'Daddario',
+    price:'Rp15.500',
+    sold:10000,
+    rating:4.8,
+    category:'Senar',
+    desc:'',
+    media:[
+      'https://down-id.img.susercontent.com/file/078b143ee1c6d5ca2247527bc9b321b1.webp',
+      'https://down-id.img.susercontent.com/file/851962c2a00c64aead4f324532726c1a.webp'
+    ],
+    affiliate:'https://s.shopee.co.id/30eTd2kCzk'
+  },
+  {
+    id:4,
+    title:'playou Capo Gitar Paduan Aluminium Capo Gitar Akustik Alat Penjepit..',
+    brand:'Tidak Bermerek',
+    price:'Rp11.246',
+    sold:2000,
+    rating:4.9,
+    category:'Capo',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/id-11134207-7ra0m-mcly97byry3n4b@resize_w450_nl.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7ra0o-mcllftzqov8803@resize_w450_nl.webp'],
+    affiliate:'https://s.shopee.co.id/9UrxOG7yXB'
+  },
+  {
+    id:5,
+    title:'Tuner Gitar Digital Alat Stem Gitar Mini Clip Guitar Tuner Joyo',
+    brand:'Joyo',
+    price:'Rp49.400',
+    sold:1000,
+    rating:4.9,
+    category:'Tuner',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/10d50abf58983918cd3e1e705d7136c1.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7r98o-lxiwk1r65fsaf8@resize_w450_nl.webp'],
+    affiliate:'https://s.shopee.co.id/6VELpCcCDx'
+  },
+  {
+    id:6,
+    title:'Senar Gitar Akustik String Philter LX Original',
+    brand:'Philter',
+    price:'Rp49.000',
+    sold:10000,
+    rating:4.8,
+    category:'Senar',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/id-11134207-7qul4-lgi4f377bi45f5.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7qukx-lgi4f3775vudd6.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7qul3-lgi4f3774h9xde.webp'],
+    affiliate:'https://s.shopee.co.id/30eTkvXfko'
+  },
+  {
+    id:7,
+    title:'Senar Gitar Elektrik Philter RX Original',
+    brand:'Philter',
+    price:'Rp49.500',
+    sold:10000,
+    rating:4.9,
+    category:'Senar',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/id-11134207-7qul4-lgit5woleasp21.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7qula-lgal40af8nwb80.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7qul9-lgal40afa2gra3.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7qukw-lgal40afbh17d2.webp'],
+    affiliate:'https://s.shopee.co.id/30eTlGUPkA'
+  },
+  {
+    id:8,
+    title:'Gitar Yamahha APX Custom Tanam Besi / Gitar Yamaha Pemula',
+    brand:'Tidak Bermerek',
+    price:'Rp249.000',
+    sold:10000,
+    rating:4.5,
+    category:'Gitar',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/id-11134207-7rbkd-m8rg2m4zyjgb84.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7rbk6-m7g13rhzc5y81e.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7rbk4-m7g09emml23wfa.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7rbk0-m7j62rj5deis94.webp'],
+    affiliate:'https://s.shopee.co.id/8UzQJmYMwF'
+  },
+  {
+    id:9,
+    title:'Softcase Gitar / Tas Gitar Akustik Jumbo SoundCase Theory',
+    brand:'Tidak Bermerek',
+    price:'Rp161.576',
+    sold:5000,
+    rating:4.9,
+    category:'Softcase Gitar',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/3390df3dcc1cdf82ce420b9e24a1805f.webp', 'https://down-id.img.susercontent.com/file/0445b35eb5ae80d8d71b00063a0b7ebd.webp', 'https://down-id.img.susercontent.com/file/e4f0638e2ac5613239b2d1da0d49713e.webp', 'https://down-id.img.susercontent.com/file/dc11f0a286fd88a1ec9f16d9926a1585.webp'],
+    affiliate:'https://s.shopee.co.id/AA7eJWJ6MO'
+  },
+  {
+    id:10,
+    title:'Tas Gitar Elektrik / Softcase Gitar Elektrik SoundCase Theory',
+    brand:'Tidak Bermerek',
+    price:'Rp161.053',
+    sold:1000,
+    rating:4.9,
+    category:'Softcase Gitar',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/id-11134207-7ra0h-mcj21wh5m32vfe.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7rasm-m4typspic6py9f.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7rasl-m4typsq2bdgofd.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7rasm-m4typspiezuu75.webp'],
+    affiliate:'https://s.shopee.co.id/6KuvknvVui'
+  },
+  {
+    id:11,
+    title:'Pick Gitar Alice/Pick Gitar Alice 1box All ukuran',
+    brand:'Tidak Bermerek',
+    price:'Rp22.500',
+    sold:1000,
+    rating:4.8,
+    category:'Aksesoris',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/bad43652c0740b58e2c3cbb9d6f2eb79.webp', 'https://down-id.img.susercontent.com/file/4733ed3519509d6ecabdf90a76f8dc0f.webp', 'https://down-id.img.susercontent.com/file/74ff546c9263a83e26b411efa239c9d9.webp', 'https://down-id.img.susercontent.com/file/bb761b3404d87176ce0d68f377a7dcae.webp'],
+    affiliate:'https://s.shopee.co.id/2qL3aesQKp'
+  },
+  {
+    id:12,
+    title:'Pick Gitar Murah Pemetik Gitar 1 Set 20pcs 0,5mm 1,0mm 2,0mm 3,0mm Pack',
+    brand:'Tidak Bermerek',
+    price:'Rp35.000',
+    sold:2000,
+    rating:4.8,
+    category:'Aksesoris',
+    desc:'',
+    media:['https://down-id.img.susercontent.com/file/c7b23caa677ee67ccc165859ab1cebce.webp', 'https://down-id.img.susercontent.com/file/id-11134207-7r98u-lsdnq54g3lvd7c.webp', 'https://down-id.img.susercontent.com/file/3e904a602b81b8ac0f8e95bd9928b93d.webp', 'https://down-id.img.susercontent.com/file/113b85a009dc9b61f2ba5b735e4d85fc.webp'],
+    affiliate:'https://s.shopee.co.id/9zoE86FnzQ'
+  }
+];
+
+const grid = document.getElementById('grid');
+const catsEl = document.getElementById('categories');
+const q = document.getElementById('q');
+
+let activeCategory = 'Semua';
+let currentIndex = 0;
+
+function uniqueCategories(){
+  const cats = new Set(PRODUCTS.map(p=>p.category));
+  return ['Semua', ...cats];
+}
+
+function renderCategories(){
+  catsEl.innerHTML='';
+  uniqueCategories().forEach(c=>{
+    const b = document.createElement('button');
+    b.textContent = c;
+    b.className='cat'+(c===activeCategory? ' active':'');
+    b.onclick = ()=>{activeCategory=c; renderCategories(); renderGrid();}
+    catsEl.appendChild(b);
+  })
+}
+
+function starHTML(r){
+  const full = Math.floor(r);
+  const half = (r - full) >= 0.5;
+  let out='';
+  for(let i=0;i<5;i++){
+    if(i<full) out += '<span class="star"><i class="fa-solid fa-star"></i></span>';
+    else if(i===full && half) out += '<span class="star"><i class="fa-solid fa-star"></i></span>';
+    else out += '<span class="star" style="color:#e6e6e6"><i class="fa-solid fa-star"></i></span>';
+  }
+  return out;
+}
+
+// === format sold ===
+function formatSold(num){
+  if(num >= 1000){
+    let inK = (num / 1000).toFixed(1);
+    return inK.replace('.0','') + 'RB+';
+  }
+  return num;
+}
+
+function renderGrid(){
+  const term = q.value.trim().toLowerCase();
+  const items = PRODUCTS.filter(p=>{
+    if(activeCategory!=='Semua' && p.category!==activeCategory) return false;
+    if(!term) return true;
+    return (p.title + ' ' + p.brand + ' ' + p.category).toLowerCase().includes(term);
+  });
+  grid.innerHTML='';
+  if(items.length===0){grid.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--muted)">Tidak ada produk.</div>';return}
+  for(const p of items){
+    const c = document.createElement('article'); c.className='card'; c.tabIndex=0;
+    c.innerHTML = `
+      <img loading="lazy" class="thumb" src="${p.media[0]}" alt="${escapeHtml(p.title)}" />
+      <div class="title">${escapeHtml(p.title)}</div>
+      <div class="meta"><div class="muted">${escapeHtml(p.brand)}</div><div class="price">${p.price}</div></div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="rating"><div class="stars">${starHTML(p.rating)}</div><div class="muted" style="margin-left:0px">${p.rating}</div></div>
+        <div class="muted">${formatSold(p.sold)} terjual</div>
+      </div>
+    `;
+    c.onclick = ()=> openModal(p);
+    c.onkeydown = (e)=>{ if(e.key==='Enter') openModal(p) }
+    grid.appendChild(c);
+  }
+}
+
+// ===== modal logic =====
+const backdrop = document.getElementById('backdrop');
+const slides = document.getElementById('slides');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+const pTitle = document.getElementById('p-title');
+const pBrand = document.getElementById('p-brand');
+const pPrice = document.getElementById('p-price');
+const pDesc = document.getElementById('p-desc');
+const pSold = document.getElementById('p-sold');
+const pStars = document.getElementById('p-stars');
+const pRating = document.getElementById('p-rating');
+const shopeeBtn = document.getElementById('shopee-btn');
+const closeBtn = document.getElementById('close');
+
+function openModal(product){
+  backdrop.style.display='flex'; backdrop.setAttribute('aria-hidden','false');
+  pTitle.textContent = product.title;
+  pBrand.textContent = product.brand;
+  pPrice.textContent = product.price;
+  pDesc.textContent = product.desc;
+  pSold.textContent = formatSold(product.sold) + ' terjual';
+  pRating.textContent = product.rating;
+  pStars.innerHTML = starHTML(product.rating);
+  shopeeBtn.href = product.affiliate;
+
+  slides.innerHTML='';
+  product.media.forEach(m=>{
+    const el = document.createElement('div'); el.className='slide';
+    if(m.match(/\.(mp4|webm|ogg)$/i)){
+      el.innerHTML = `<video playsinline controls preload="metadata" src="${m}"></video>`;
+    } else {
+      el.innerHTML = `<img loading="lazy" src="${m}" alt="${escapeHtml(product.title)}"/>`;
+    }
+    slides.appendChild(el);
+  });
+  currentIndex = 0; updateSlider();
+}
+
+function closeModal(){
+  backdrop.style.display='none'; backdrop.setAttribute('aria-hidden','true');
+}
+
+prev.onclick = ()=>{ if(currentIndex>0){ currentIndex--; updateSlider() } }
+next.onclick = ()=>{ if(currentIndex < slides.children.length-1){ currentIndex++; updateSlider() } }
+
+function updateSlider(){
+  slides.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+}
+
+backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(); });
+closeBtn.addEventListener('click', closeModal);
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); if(e.key==='ArrowLeft') prev.click(); if(e.key==='ArrowRight') next.click(); });
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(ch){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'}[ch]
+  });
+}
+
+renderCategories();
+renderGrid();
+q.addEventListener('input', ()=> renderGrid());
+</script>
+</body>
+</html>
